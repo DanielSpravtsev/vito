@@ -16,7 +16,7 @@ class Github extends AbstractSourceControlProvider
     {
         $res = Http::withHeaders([
             'Accept' => 'application/vnd.github.v3+json',
-            'Authorization' => 'Bearer '.$this->data()['token'],
+            'Authorization' => 'Bearer '.str($this->data()['token'])->replace('"', '')->value(),
         ])->get($this->apiUrl.'/user/repos');
 
         return $res->successful();
